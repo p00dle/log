@@ -1,5 +1,5 @@
 {
-  "name": "@kksiuda/logger",
+  "name": "@kksiuda/log",
   "version": "0.2.4",
   "description": "Logging for node.js",
   "main": "dist/index.js",
