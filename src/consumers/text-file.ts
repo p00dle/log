@@ -1,15 +1,10 @@
-import type { LogFormatter, LogConsumer } from '../types';
+import type { LogConsumer } from '../types';
 
 import * as fs from 'fs/promises';
-import { defaultLogFormmater } from '../formatters/defaultLogFormmater';
 
 type WriteFile = (filePath: string, content: string, params: { flag: 'a'; encoding: 'utf8' }) => Promise<any>;
 
-export const textFileLogConsumerFactory = function (
-  filePath: string,
-  logFormatter: LogFormatter = defaultLogFormmater,
-  writeFile: WriteFile = fs.writeFile
-): LogConsumer {
+export const textFileLogConsumerFactory = function (filePath: string, writeFile: WriteFile = fs.writeFile): LogConsumer<string> {
   let writing = false;
   let backlog: string[] = [];
 
@@ -22,9 +17,9 @@ export const textFileLogConsumerFactory = function (
     writing = false;
     writeToFile();
   }
-  return (message, logLevel, namespaces) => {
+  return (logString, logLevel) => {
     if (logLevel !== 'silent') {
-      backlog.push(logFormatter(message, logLevel, namespaces));
+      backlog.push(logString);
       if (!writing) process.nextTick(writeToFile);
     }
   };
