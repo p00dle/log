@@ -11,7 +11,7 @@ export const textFileLogConsumerFactory = function (filePath: string, writeFile:
   async function writeToFile() {
     if (backlog.length === 0) return;
     writing = true;
-    const content = backlog.join('\n');
+    const content = backlog.join('\n') + '\n';
     backlog = [];
     await writeFile(filePath, content, { flag: 'a', encoding: 'utf8' });
     writing = false;

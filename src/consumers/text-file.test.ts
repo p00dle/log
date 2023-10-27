@@ -22,7 +22,7 @@ describe('getTimestampString', () => {
     textFileConsumer('silent', 'silent');
     await new Promise((resolve) => setTimeout(resolve, 100));
     const logs = container.str.split('\n');
-    expect(logs).toEqual(['trace', 'debug', 'info', 'warn', 'error']);
+    expect(logs).toEqual(['trace', 'debug', 'info', 'warn', 'error', '']);
     expect(container.writeCount).toBe(1);
   });
 });
