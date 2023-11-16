@@ -1,6 +1,6 @@
 {
   "name": "@kksiuda/log",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Logging for node.js",
   "main": "dist/index.js",
   "author": "Krzysztof Siuda",
@@ -37,5 +37,8 @@
     "format": "prettier --write .",
     "pre-build": "tsc --noemit && eslint . --ext .ts && prettier --write . && vitest --run",
     "dist": "tsc"
+  },
+  "peerDependencies": {
+    "sqlite3": "^5.1.6"
   }
 }
