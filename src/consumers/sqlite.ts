@@ -2,6 +2,7 @@ import * as path from 'node:path';
 import { createDirIfNotExist } from '../lib/createDirIfNotExist';
 import type { LogConsumer, LogDetails } from '../types';
 import type { Database } from 'sqlite3';
+import { stringifyUnknownError } from '../lib/stringifyUnknownError';
 
 type DbFactory = (filePath: string, callback: (err: unknown | null, db: Database) => void) => void;
 
@@ -69,7 +70,11 @@ export const sqliteLogConsumerFactory = function (
       $level: details.logLevel,
       $message: details.message,
       $namespace: details.namespace.join('/'),
-      $details: details.details ? JSON.stringify(details.details, null, 2) : '',
+      $details: details.details
+        ? level === 'error'
+          ? stringifyUnknownError(details.details)
+          : JSON.stringify(details.details, null, 2)
+        : '',
     };
     getDb(filePath, (err, db) => {
       if (err) throw err;
