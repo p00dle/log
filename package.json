@@ -1,6 +1,6 @@
 {
   "name": "@kksiuda/log",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Logging for node.js",
   "main": "dist/index.js",
   "author": "Krzysztof Siuda",
