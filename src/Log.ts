@@ -48,6 +48,10 @@ export class Log<T> {
     for (const child of this.children) child.setLogLevel(logLevel);
   }
 
+  public getLogLevel(): LogLevel {
+    return this.logLevel;
+  }
+  
   public namespace(namespace: string): Log<T> {
     const child = new Log({
       consumer: this.consumer,
